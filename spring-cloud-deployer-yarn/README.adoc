@@ -1,0 +1,21 @@
+== Spring Cloud Deployer for Apache Yarn
+
+image:https://build.spring.io/plugins/servlet/buildStatusImage/SCD-DYARNMASTER[Build Status, link=https://build.spring.io/browse/SCD-DYARNMASTER]
+
+=== Building
+
+Build and skip all tests:
+```
+./mvnw clean package -DskipTests
+```
+
+Build and enable all tests:
+```
+./mvnw clean package -DskipITs=false
+```
+
+Or build project and run tests(tests take long time to run):
+```
+./mvnw clean package
+```
+

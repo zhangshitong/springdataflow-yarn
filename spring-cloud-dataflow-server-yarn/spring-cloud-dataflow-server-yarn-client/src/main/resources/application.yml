@@ -1,0 +1,18 @@
+logging:
+  level:
+    org.springframework: WARN
+    org.apache.hadoop: OFF
+spring:
+  main:
+    banner_mode: "off"
+  cloud:
+    dataflow:
+      yarn:
+        version: "@project.version@"
+    deployer:
+      yarn:
+        version: "@spring-cloud-deployer-yarn.version@"
+  yarn:
+    appType: DATAFLOW
+    client:
+      clientClass: org.springframework.yarn.client.DefaultApplicationYarnClient

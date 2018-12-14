@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>spring-cloud-dataflow-server-yarn-docs</artifactId>
+	<version>1.2.2.RELEASE</version>
+	<parent>
+		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-dataflow-server-yarn-parent</artifactId>
+		<version>1.2.2.RELEASE</version>
+	</parent>
+
+	<name>spring-cloud-dataflow-server-yarn-docs</name>
+	<description>Spring Cloud Data Flow Server YARN</description>
+	<properties>
+		<main.basedir>${basedir}/..</main.basedir>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-dataflow-server-yarn</artifactId>
+			<version>1.2.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-dataflow-server-yarn-autoconfig</artifactId>
+			<version>1.2.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-dataflow-server-yarn-client</artifactId>
+			<version>1.2.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-dataflow-server-yarn-h2</artifactId>
+			<version>1.2.2.RELEASE</version>
+		</dependency>
+	</dependencies>
+	<profiles>
+		<profile>
+			<id>full</id>
+			<build>
+				<plugins>
+					<plugin>
+						<!-- This automatically exposes a property for each dep in the form gId:aId:type.version, used below-->
+						<groupId>io.reformanda.semper</groupId>
+						<artifactId>dependencyversion-maven-plugin</artifactId>
+						<version>1.0.1</version>
+						<executions>
+							<execution>
+								<id>set-all</id>
+								<goals>
+									<goal>set-version</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>xml-maven-plugin</artifactId>
+						<version>1.0</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>transform</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<transformationSets>
+								<transformationSet>
+									<dir>${project.build.directory}/external-resources</dir>
+									<stylesheet>src/main/xslt/dependencyVersions.xsl</stylesheet>
+									<fileMappers>
+										<fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+											<targetExtension>.adoc</targetExtension>
+										</fileMapper>
+									</fileMappers>
+									<outputDir>${project.build.directory}/generated-resources</outputDir>
+								</transformationSet>
+							</transformationSets>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.10.1</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+								<phase>prepare-package</phase>
+								<configuration>
+									<includeDependencySources>true</includeDependencySources>
+									<dependencySourceIncludes>
+										<dependencySourceInclude>${project.groupId}:*</dependencySourceInclude>
+									</dependencySourceIncludes>
+									<attach>false</attach>
+									<quiet>true</quiet>
+									<stylesheetfile>${basedir}/src/main/javadoc/spring-javadoc.css</stylesheetfile>
+									<links>
+										<link>http://docs.spring.io/spring-framework/docs/${spring.version}/javadoc-api/</link>
+										<link>http://docs.spring.io/spring-shell/docs/current/api/</link>
+									</links>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.asciidoctor</groupId>
+						<artifactId>asciidoctor-maven-plugin</artifactId>
+						<version>1.5.0</version>
+						<configuration>
+							<sourceDocumentName>index.adoc</sourceDocumentName>
+							<doctype>book</doctype>
+							<attributes>
+								<allow-uri-read>true</allow-uri-read>
+								<attribute-missing>warn</attribute-missing>
+								<revnumber-version>${project.version}</revnumber-version>
+								<project-version>${project.version}</project-version>
+								<project-artifactId>${project.artifactId}</project-artifactId>
+								<version-type>${version-type}</version-type>
+								<version-type-lowercase>${version-type-lowercase}</version-type-lowercase>
+								<version-number>${version-number}</version-number>
+								<dataflow-project-version>${spring-cloud-dataflow.version}</dataflow-project-version>
+								<dataflow-version-type-lowercase>${dataflow-version-type-lowercase}</dataflow-version-type-lowercase>
+								<sct-core-version>${org.springframework.cloud:spring-cloud-task-core:jar.version}</sct-core-version>
+								<scdf-core-version>${org.springframework.cloud:spring-cloud-dataflow-core:jar.version}</scdf-core-version>
+								<scdt-core-version>current-SNAPSHOT</scdt-core-version>
+								<scst-core-version>current-SNAPSHOT</scst-core-version>
+								<scst-starters-core-version>current-SNAPSHOT</scst-starters-core-version>
+								<sct-starters-core-version>current-SNAPSHOT</sct-starters-core-version>
+								<spring-boot-docs-version>${project.version}</spring-boot-docs-version>
+								<spring-docs-version>${spring.version}</spring-docs-version>
+								<spring-security-docs-version>${spring-security.version}</spring-security-docs-version>
+								<dataflow-asciidoc>https://raw.githubusercontent.com/spring-cloud/spring-cloud-dataflow/${dataflow-branch-or-tag}/spring-cloud-dataflow-docs/src/main/asciidoc</dataflow-asciidoc>
+								<spring-cloud-stream-docs>${project.version}</spring-cloud-stream-docs>
+							</attributes>
+						</configuration>
+						<executions>
+							<execution>
+								<id>generate-docbook</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>process-asciidoc</goal>
+								</goals>
+								<configuration>
+									<sourceDocumentName>index.adoc</sourceDocumentName>
+									<backend>docbook5</backend>
+									<doctype>book</doctype>
+									<attributes>
+										<docinfo>true</docinfo>
+										<revnumber-version>${project.version}</revnumber-version>
+										<spring-boot-version>${project.version}</spring-boot-version>
+										<spring-boot-docs-version>${project.version}</spring-boot-docs-version>
+										<spring-boot-repo>${spring-boot-repo}</spring-boot-repo>
+										<spring-docs-version>${spring.version}</spring-docs-version>
+										<spring-security-docs-version>${spring-security.version}</spring-security-docs-version>
+										<allow-uri-read>true</allow-uri-read>
+										<github-tag>${github-tag}</github-tag>
+										<version-type>${version-type}</version-type>
+										<version-type-lowercase>${version-type-lowercase}</version-type-lowercase>
+										<version-number>${version-number}</version-number>
+										<dataflow-asciidoc>https://raw.githubusercontent.com/spring-cloud/spring-cloud-dataflow/${dataflow-branch-or-tag}/spring-cloud-dataflow-docs/src/main/asciidoc</dataflow-asciidoc>
+										<!-- The following two are deps of this project and set automatically.-->
+										<!-- Others are loose dependencies, and current-SNAPSHOT typically make sense-->
+										<scdf-core-version>${org.springframework.cloud:spring-cloud-dataflow-core:jar.version}</scdf-core-version>
+										<sct-core-version>${org.springframework.cloud:spring-cloud-task-core:jar.version}</sct-core-version>
+										<scdt-core-version>current-SNAPSHOT</scdt-core-version>
+										<scst-core-version>current-SNAPSHOT</scst-core-version>
+										<scst-starters-core-version>current-SNAPSHOT</scst-starters-core-version>
+										<sct-starters-core-version>current-SNAPSHOT</sct-starters-core-version>
+										<spring-cloud-stream-docs>${project.version}</spring-cloud-stream-docs>
+									</attributes>
+								</configuration>
+							</execution>
+							<execution>
+								<id>generate-html5</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>process-asciidoc</goal>
+								</goals>
+								<configuration>
+									<backend>html5</backend>
+									<attributes>
+										<toc2 />
+									</attributes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>com.agilejava.docbkx</groupId>
+						<artifactId>docbkx-maven-plugin</artifactId>
+						<version>2.0.15</version>
+						<configuration>
+							<sourceDirectory>${basedir}/target/generated-docs</sourceDirectory>
+							<imgSrcPath />
+							<graphicsize.extension>0</graphicsize.extension>
+							<includes>index.xml</includes>
+							<xincludeSupported>true</xincludeSupported>
+							<chunkedOutput>false</chunkedOutput>
+							<foCustomization>${basedir}/src/main/docbook/xsl/pdf.xsl</foCustomization>
+							<useExtensions>1</useExtensions>
+							<admonGraphics>1</admonGraphics>
+							<highlightSource>1</highlightSource>
+							<highlightXslthlConfig>${basedir}/src/main/docbook/xsl/xslthl-config.xml</highlightXslthlConfig>
+							<preProcess>
+								<copy todir="${basedir}/target/generated-docs/images">
+									<fileset dir="${basedir}/src/main/docbook/images" />
+								</copy>
+							</preProcess>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>net.sf.xslthl</groupId>
+								<artifactId>xslthl</artifactId>
+								<version>2.1.0</version>
+							</dependency>
+							<dependency>
+								<groupId>net.sf.docbook</groupId>
+								<artifactId>docbook-xml</artifactId>
+								<version>5.0-all</version>
+								<classifier>resources</classifier>
+								<type>zip</type>
+								<scope>runtime</scope>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>html</id>
+								<goals>
+									<goal>generate-html</goal>
+								</goals>
+								<phase>generate-resources</phase>
+								<configuration>
+									<htmlCustomization>${basedir}/src/main/docbook/xsl/html-multipage.xsl</htmlCustomization>
+									<targetDirectory>${basedir}/target/docbook/html</targetDirectory>
+									<chunkedOutput>true</chunkedOutput>
+									<postProcess>
+										<copy todir="${basedir}/target/contents/reference/html">
+											<fileset dir="${basedir}/target/docbook/html">
+												<include name="**/*.html" />
+											</fileset>
+										</copy>
+										<copy todir="${basedir}/target/contents/reference/html/images">
+											<fileset dir="${basedir}/target/generated-docs/images" />
+										</copy>
+										<copy todir="${basedir}/target/contents/reference/html/css">
+											<fileset dir="${basedir}/src/main/docbook/css" />
+										</copy>
+									</postProcess>
+								</configuration>
+							</execution>
+							<execution>
+								<id>pdf</id>
+								<goals>
+									<goal>generate-pdf</goal>
+								</goals>
+								<phase>generate-resources</phase>
+								<configuration>
+									<foCustomization>${basedir}/src/main/docbook/xsl/pdf.xsl</foCustomization>
+									<targetDirectory>${basedir}/target/docbook/pdf</targetDirectory>
+									<postProcess>
+										<copy todir="${basedir}/target/contents/reference">
+											<fileset dir="${basedir}/target/docbook">
+												<include name="**/*.pdf" />
+											</fileset>
+										</copy>
+										<move file="${basedir}/target/contents/reference/pdf/index.pdf" tofile="${basedir}/target/contents/reference/pdf/spring-cloud-dataflow-server-yarn-reference.pdf" />
+									</postProcess>
+								</configuration>
+							</execution>
+							<execution>
+								<id>epub</id>
+								<goals>
+									<goal>generate-epub3</goal>
+								</goals>
+								<phase>generate-resources</phase>
+								<configuration>
+									<epubCustomization>${basedir}/src/main/docbook/xsl/epub.xsl</epubCustomization>
+									<targetDirectory>${basedir}/target/docbook/epub</targetDirectory>
+									<preProcess>
+										<copy todir="${basedir}/target/docbook/epub/images">
+											<fileset dir="${basedir}/src/main/docbook/images" />
+											<fileset dir="${basedir}/src/main/asciidoc/images" />
+										</copy>
+									</preProcess>
+									<postProcess>
+										<copy todir="${basedir}/target/contents/reference/epub">
+											<fileset dir="${basedir}/target/docbook">
+												<include name="**/*.epub" />
+											</fileset>
+										</copy>
+										<move file="${basedir}/target/contents/reference/epub/index.epub" tofile="${basedir}/target/contents/reference/epub/spring-cloud-dataflow-server-yarn-reference.epub" />
+									</postProcess>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.8</version>
+						<dependencies>
+							<dependency>
+								<groupId>ant-contrib</groupId>
+								<artifactId>ant-contrib</artifactId>
+								<version>1.0b3</version>
+								<exclusions>
+									<exclusion>
+										<groupId>ant</groupId>
+										<artifactId>ant</artifactId>
+									</exclusion>
+								</exclusions>
+							</dependency>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant-nodeps</artifactId>
+								<version>1.8.1</version>
+							</dependency>
+							<dependency>
+								<groupId>org.tigris.antelope</groupId>
+								<artifactId>antelopetasks</artifactId>
+								<version>3.2.10</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>package-and-attach-docs-zip</id>
+								<phase>package</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<zip destfile="${project.build.directory}/${project.artifactId}-${project.version}.zip">
+											<zipfileset src="${project.build.directory}/${project.artifactId}-${project.version}-javadoc.jar" prefix="api" />
+											<fileset dir="${project.build.directory}/contents" />
+											<zipfileset dir="${project.build.directory}/generated-docs" prefix="reference/htmlsingle">
+												<include name="index.html" />
+												<include name="images/**" />
+											</zipfileset>
+										</zip>
+									</target>
+								</configuration>
+							</execution>
+							<execution>
+								<id>setup-maven-properties</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<exportAntProperties>true</exportAntProperties>
+									<target>
+										<taskdef resource="net/sf/antcontrib/antcontrib.properties" />
+										<taskdef name="stringutil" classname="ise.antelope.tasks.StringUtilTask" />
+										<var name="version-type" value="${project.version}" />
+										<propertyregex property="version-type" override="true" input="${version-type}" regexp=".*\.(.*)" replace="\1" />
+										<propertyregex property="version-type" override="true" input="${version-type}" regexp="(M)\d+" replace="MILESTONE" />
+										<propertyregex property="version-type" override="true" input="${version-type}" regexp="(RC)\d+" replace="MILESTONE" />
+										<propertyregex property="version-type" override="true" input="${version-type}" regexp="BUILD-(.*)" replace="SNAPSHOT" />
+										<stringutil string="${version-type}" property="version-type-lowercase">
+											<lowercase />
+										</stringutil>
+										<var name="github-tag" value="v${project.version}" />
+										<propertyregex property="github-tag" override="true" input="${github-tag}" regexp=".*SNAPSHOT" replace="master" />
+										<propertyregex property="dataflow-branch-or-tag" override="true" input="${spring-cloud-dataflow.version}" regexp=".*\.(?:M\d+|RC\d+|RELEASE)" select="v\0" defaultValue="master" />
+										<var name="version-number" value="${project.version}" />
+										<propertyregex property="version-number" override="true" input="${version-number}" regexp="(.*)\..*" replace="\1" />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<version>1.9.1</version>
+						<executions>
+							<execution>
+								<id>attach-zip</id>
+								<goals>
+									<goal>attach-artifact</goal>
+								</goals>
+								<configuration>
+									<artifacts>
+										<artifact>
+											<file>${project.build.directory}/${project.artifactId}-${project.version}.zip</file>
+											<type>zip;zip.type=docs;zip.deployed=false</type>
+										</artifact>
+									</artifacts>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>net.radai</groupId>
+						<artifactId>grep-maven-plugin</artifactId>
+						<version>1.0</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>grep</goal>
+								</goals>
+								<phase>test</phase>
+								<configuration>
+									<greps>
+										<grep>
+											<file>target/generated-docs/index.html</file>
+											<grepPattern>Unresolved directive in .*\.adoc - include::</grepPattern>
+											<failIfFound>true</failIfFound>
+										</grep>
+									</greps>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

@@ -1,0 +1,40 @@
+server:
+  port: 0
+management:
+  security:
+    enabled: false
+endpoints:
+  shutdown:
+    enabled: true
+spring:
+  main:
+    show_banner: false
+  cloud:
+    dataflow:
+      yarn:
+        version: "@project.version@"
+  yarn:
+    applicationBaseDir: ${spring.cloud.deployer.yarn.app.baseDir:/dataflow}/apps/task/
+    appmaster:
+      containerCount: 1
+      appmasterClass: org.springframework.cloud.deployer.spi.yarn.tasklauncher.TaskAppmaster
+      localizer:
+        patterns:
+          - "servers.yml"
+      resource:
+        priority: ${spring.cloud.deployer.yarn.app.taskcontainer.priority:10}
+        labelExpression: ${spring.cloud.deployer.yarn.app.taskcontainer.labelExpression:}
+        memory: ${spring.cloud.deployer.yarn.app.taskcontainer.memory:256m}
+        virtualCores: ${spring.cloud.deployer.yarn.app.taskcontainer.virtualCores:1}
+      launchcontext:
+        options:
+          - ${spring.cloud.deployer.yarn.app.taskcontainer.javaOpts:}
+        arguments:
+          -Dserver.port: 0
+          -Dspring.jmx.enabled: false              
+          -Dspring.config.location: servers.yml
+        locality: false
+        archiveFile: placeholder.jar
+    endpoints:
+      containerregister:
+        enabled: false

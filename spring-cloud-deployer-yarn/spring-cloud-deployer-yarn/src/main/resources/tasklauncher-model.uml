@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_MyH_8BaAEeaeH5SlvwGOyg" name="RootElement">
+  <packagedElement xmi:type="uml:StateMachine" xmi:id="_MyKcMBaAEeaeH5SlvwGOyg" name="StateMachine">
+    <region xmi:type="uml:Region" xmi:id="_MyLDQBaAEeaeH5SlvwGOyg" name="Region1">
+      <transition xmi:type="uml:Transition" xmi:id="_FFxDUBkUEeapnMylBysFZA" source="_tbAeMBkTEeapnMylBysFZA" target="_lKKrYBj9EeapnMylBysFZA"/>
+      <transition xmi:type="uml:Transition" xmi:id="_XFR84BkUEeapnMylBysFZA" source="_62uhoBkBEeapnMylBysFZA" target="_lKKrYBj9EeapnMylBysFZA"/>
+      <transition xmi:type="uml:Transition" xmi:id="_X80o4BkUEeapnMylBysFZA" guard="_qAL1wBkWEeapnMylBysFZA" source="_m2UEIBj9EeapnMylBysFZA" target="_62uhoBkBEeapnMylBysFZA">
+        <ownedRule xmi:type="uml:Constraint" xmi:id="_qAL1wBkWEeapnMylBysFZA">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_qAL1wRkWEeapnMylBysFZA">
+            <language>bean</language>
+            <body>errorGuard</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:type="uml:Transition" xmi:id="_YarCgBkUEeapnMylBysFZA" guard="_uNb5UBkWEeapnMylBysFZA" source="_ttGVwBj9EeapnMylBysFZA" target="_62uhoBkBEeapnMylBysFZA">
+        <ownedRule xmi:type="uml:Constraint" xmi:id="_uNb5UBkWEeapnMylBysFZA">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_uNb5URkWEeapnMylBysFZA">
+            <language>bean</language>
+            <body>errorGuard</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:type="uml:Transition" xmi:id="_hN_SQBkUEeapnMylBysFZA" source="_acJLABkUEeapnMylBysFZA" target="_cw6C8BkUEeapnMylBysFZA"/>
+      <transition xmi:type="uml:Transition" xmi:id="_h1bswBkUEeapnMylBysFZA" source="_ZUpXcBkUEeapnMylBysFZA" target="_cw6C8BkUEeapnMylBysFZA"/>
+      <transition xmi:type="uml:Transition" xmi:id="_iVqsABkUEeapnMylBysFZA" guard="_yVRRYBkWEeapnMylBysFZA" source="_cw6C8BkUEeapnMylBysFZA" target="_62uhoBkBEeapnMylBysFZA">
+        <ownedRule xmi:type="uml:Constraint" xmi:id="_yVRRYBkWEeapnMylBysFZA">
+          <specification xmi:type="uml:OpaqueExpression" xmi:id="_yVRRYRkWEeapnMylBysFZA">
+            <language>bean</language>
+            <body>errorGuard</body>
+          </specification>
+        </ownedRule>
+      </transition>
+      <transition xmi:type="uml:Transition" xmi:id="_jEFRMBkUEeapnMylBysFZA" source="_cw6C8BkUEeapnMylBysFZA" target="_lKKrYBj9EeapnMylBysFZA"/>
+      <transition xmi:type="uml:Transition" xmi:id="_4ZUvECAoEeak_Pp-I1uH1w" source="_lKKrYBj9EeapnMylBysFZA" target="_m2UEIBj9EeapnMylBysFZA">
+        <trigger xmi:type="uml:Trigger" xmi:id="_8ttVYCAoEeak_Pp-I1uH1w" event="_xSJRACAoEeak_Pp-I1uH1w"/>
+      </transition>
+      <transition xmi:type="uml:Transition" xmi:id="_6dFWkCAoEeak_Pp-I1uH1w" source="_lKKrYBj9EeapnMylBysFZA" target="_ttGVwBj9EeapnMylBysFZA">
+        <trigger xmi:type="uml:Trigger" xmi:id="__ptzgCAoEeak_Pp-I1uH1w" event="_0arvQCAoEeak_Pp-I1uH1w"/>
+      </transition>
+      <subvertex xmi:type="uml:State" xmi:id="_lKKrYBj9EeapnMylBysFZA" name="READY">
+        <exit xmi:type="uml:OpaqueBehavior" xmi:id="_9Ir50CArEeak_Pp-I1uH1w" name="resetVariablesAction">
+          <language>bean</language>
+          <body>resetVariablesAction</body>
+        </exit>
+      </subvertex>
+      <subvertex xmi:type="uml:State" xmi:id="_m2UEIBj9EeapnMylBysFZA" name="LAUNCHTASK">
+        <connectionPoint xmi:type="uml:Pseudostate" xmi:id="_ZUpXcBkUEeapnMylBysFZA" name="LAUNCHEXIT" kind="exitPoint"/>
+        <deferrableTrigger xmi:type="uml:Trigger" xmi:id="_2FlUYCA0Eeae5aYuVP_vwQ" event="_xSJRACAoEeak_Pp-I1uH1w"/>
+        <deferrableTrigger xmi:type="uml:Trigger" xmi:id="_3ayz0CA0Eeae5aYuVP_vwQ" event="_0arvQCAoEeak_Pp-I1uH1w"/>
+        <entry xmi:type="uml:OpaqueBehavior" xmi:id="_v9gMQCF7Eeae5aYuVP_vwQ" name="launchAction">
+          <language>bean</language>
+          <body>launchAction</body>
+        </entry>
+        <region xmi:type="uml:Region" xmi:id="_I9B_4BkAEeapnMylBysFZA" name="Region1">
+          <transition xmi:type="uml:Transition" xmi:id="_EitZkBkUEeapnMylBysFZA" source="_uKA5QBkTEeapnMylBysFZA" target="_I9FqQBkAEeapnMylBysFZA"/>
+          <transition xmi:type="uml:Transition" xmi:id="_Sm6UIBkUEeapnMylBysFZA" source="_I9FqQBkAEeapnMylBysFZA" target="_LbJ4EBkUEeapnMylBysFZA"/>
+          <transition xmi:type="uml:Transition" xmi:id="_TJfcwBkUEeapnMylBysFZA" guard="_jORdEBkWEeapnMylBysFZA" source="_LbJ4EBkUEeapnMylBysFZA" target="_MFXCwBkAEeapnMylBysFZA">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_jORdEBkWEeapnMylBysFZA">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_jORdERkWEeapnMylBysFZA">
+                <language>bean</language>
+                <body>pushAppGuard</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_UGeCYBkUEeapnMylBysFZA" source="_LbJ4EBkUEeapnMylBysFZA" target="_OpCgcBkAEeapnMylBysFZA"/>
+          <transition xmi:type="uml:Transition" xmi:id="_UmoJIBkUEeapnMylBysFZA" source="_MFXCwBkAEeapnMylBysFZA" target="_OpCgcBkAEeapnMylBysFZA"/>
+          <transition xmi:type="uml:Transition" xmi:id="_VM434BkUEeapnMylBysFZA" source="_OpCgcBkAEeapnMylBysFZA" target="_RFxBkBkAEeapnMylBysFZA"/>
+          <transition xmi:type="uml:Transition" xmi:id="_kNH84BkUEeapnMylBysFZA" source="_RFxBkBkAEeapnMylBysFZA" target="_ZUpXcBkUEeapnMylBysFZA"/>
+          <subvertex xmi:type="uml:State" xmi:id="_I9FqQBkAEeapnMylBysFZA" name="CHECKAPP">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_3x3hgCCsEeae5aYuVP_vwQ" name="checkAppAction">
+              <language>bean</language>
+              <body>checkAppAction</body>
+            </entry>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_MFXCwBkAEeapnMylBysFZA" name="PUSHAPP">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_DJsaACAsEeak_Pp-I1uH1w" name="pushAppAction">
+              <language>bean</language>
+              <body>pushAppAction</body>
+            </entry>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_OpCgcBkAEeapnMylBysFZA" name="PUSHARTIFACT">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_ZvtSsCAuEeak_Pp-I1uH1w" name="pushArtifactAction">
+              <language>bean</language>
+              <body>pushArtifactAction</body>
+            </entry>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_RFxBkBkAEeapnMylBysFZA" name="STARTAPP">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_3XsrQCAuEeak_Pp-I1uH1w" name="startAppAction">
+              <language>bean</language>
+              <body>startAppAction</body>
+            </entry>
+          </subvertex>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_uKA5QBkTEeapnMylBysFZA"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_LbJ4EBkUEeapnMylBysFZA" name="PUSHAPPCHOICE" kind="choice"/>
+        </region>
+      </subvertex>
+      <subvertex xmi:type="uml:State" xmi:id="_ttGVwBj9EeapnMylBysFZA" name="CANCELTASK">
+        <connectionPoint xmi:type="uml:Pseudostate" xmi:id="_acJLABkUEeapnMylBysFZA" name="CANCELEXIT" kind="exitPoint"/>
+        <deferrableTrigger xmi:type="uml:Trigger" xmi:id="_5o7fUCA0Eeae5aYuVP_vwQ" event="_xSJRACAoEeak_Pp-I1uH1w"/>
+        <deferrableTrigger xmi:type="uml:Trigger" xmi:id="_66spMCA0Eeae5aYuVP_vwQ" event="_0arvQCAoEeak_Pp-I1uH1w"/>
+        <entry xmi:type="uml:OpaqueBehavior" xmi:id="_UBkQYCF8Eeae5aYuVP_vwQ" name="cancelAction">
+          <language>bean</language>
+          <body>cancelAction</body>
+        </entry>
+        <region xmi:type="uml:Region" xmi:id="_T-UjEBkAEeapnMylBysFZA" name="Region1">
+          <transition xmi:type="uml:Transition" xmi:id="_FrtB8BkUEeapnMylBysFZA" source="_uxizUBkTEeapnMylBysFZA" target="_T-VKIBkAEeapnMylBysFZA"/>
+          <transition xmi:type="uml:Transition" xmi:id="_kuPF4BkUEeapnMylBysFZA" source="_T-VKIBkAEeapnMylBysFZA" target="_acJLABkUEeapnMylBysFZA"/>
+          <subvertex xmi:type="uml:State" xmi:id="_T-VKIBkAEeapnMylBysFZA" name="STOPAPP">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_6hPPECAuEeak_Pp-I1uH1w" name="stopAppAction">
+              <language>bean</language>
+              <body>stopAppAction</body>
+            </entry>
+          </subvertex>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_uxizUBkTEeapnMylBysFZA"/>
+        </region>
+      </subvertex>
+      <subvertex xmi:type="uml:State" xmi:id="_62uhoBkBEeapnMylBysFZA" name="ERROR">
+        <entry xmi:type="uml:OpaqueBehavior" xmi:id="_jzpT8CF6Eeae5aYuVP_vwQ" name="errorHandlingAction">
+          <language>bean</language>
+          <body>errorHandlingAction</body>
+        </entry>
+      </subvertex>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_tbAeMBkTEeapnMylBysFZA" name=""/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_cw6C8BkUEeapnMylBysFZA" name="ERROR_JUNCTION" kind="junction"/>
+    </region>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Signal" xmi:id="_shTYMCAoEeak_Pp-I1uH1w" name="LAUNCH"/>
+  <packagedElement xmi:type="uml:Signal" xmi:id="_vptTkCAoEeak_Pp-I1uH1w" name="CANCEL"/>
+  <packagedElement xmi:type="uml:SignalEvent" xmi:id="_xSJRACAoEeak_Pp-I1uH1w" name="SignalEventLAUNCH" signal="_shTYMCAoEeak_Pp-I1uH1w"/>
+  <packagedElement xmi:type="uml:SignalEvent" xmi:id="_0arvQCAoEeak_Pp-I1uH1w" name="SignalEventCANCEL" signal="_vptTkCAoEeak_Pp-I1uH1w"/>
+</uml:Model>

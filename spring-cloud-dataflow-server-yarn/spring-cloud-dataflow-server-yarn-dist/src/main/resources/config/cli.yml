@@ -1,0 +1,6 @@
+logging:
+  level:
+    org.springframework.yarn: WARN
+    org.apache.hadoop: OFF
+    org.hibernate: OFF
+

@@ -1,0 +1,40 @@
+server:
+  port: ${dataflow.server.port:9393}
+security:
+  basic:
+    enabled: false
+management:
+  contextPath: /management
+info:
+  app:
+    name: "@project.artifactId@"
+    description: "@project.description@"
+    version: "@project.version@"
+spring:
+  redis:
+      port: 6379
+      host: localhost
+  datasource:
+      url: jdbc:mysql://127.0.0.1:3306/dataflow
+      username: root
+      password:
+      driverClassName: com.mysql.jdbc.Driver
+  jpa:
+      database: MYSQL
+      show-sql: false
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL5Dialect
+  main:
+    banner_mode: "off"
+  application:
+    name: spring-cloud-dataflow-server-yarn
+  cloud:
+    dataflow:
+      yarn:
+        version: "@project.version@"
+    deployer:
+      yarn:
+        version: "@spring-cloud-deployer-yarn.version@"

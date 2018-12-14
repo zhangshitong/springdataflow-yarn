@@ -1,0 +1,84 @@
+logging:
+  level:
+    org.apache.hadoop: INFO
+    org.springframework.yarn: INFO
+maven:
+  remoteRepositories:
+    springRepo:
+      url: https://repo.spring.io/libs-snapshot
+spring:
+  main:
+    banner_mode: "off"
+  # Configured for Hadoop single-node running on localhost. Replace with property values reflecting your
+  # actual Hadoop cluster when running in a distributed environment.
+  hadoop:
+    fsUri: hdfs://localhost:8020
+    resourceManagerHost: localhost
+    resourceManagerPort: 8032
+    resourceManagerSchedulerAddress: localhost:8030
+  # Configured for Redis running on localhost. Replace at least host property when running in a
+  # distributed environment.
+  redis:
+    port: 6379
+    host: localhost
+  # Configured for an embedded in-memory H2 database. Replace the datasource configuration with properties
+  # matching your preferred database to be used instead, if needed, or when running in a distributed environment.
+  rabbitmq:
+    addresses: localhost:5672
+  # for default embedded database
+  datasource:
+    url: jdbc:h2:tcp://localhost:19092/mem:dataflow
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+#  # for mysql/mariadb datasource
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/yourDB
+#    username: yourUsername
+#    password: yourPassword
+#    driverClassName: org.mariadb.jdbc.Driver
+#  # for postgresql datasource
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/yourDB
+#    username: yourUsername
+#    password: yourPassword
+#    driverClassName: org.postgresql.Driver
+#  cloud:
+#    stream:
+#      kafka:
+#        binder:
+#          brokers: localhost:9093
+#          zkNodes: localhost:2181
+#      bindings:
+#        applicationMetrics:
+#          destination: metrics
+#    deployer:
+#      yarn:
+#        app:
+#          baseDir: /dataflow
+#          streamappmaster:
+#            memory: 512m
+#            virtualCores: 1
+#            javaOpts: "-Xms512m -Xmx512m"
+#          streamcontainer:
+#            priority: 5
+#            memory: 256m
+#            virtualCores: 1
+#            javaOpts: "-Xms64m -Xmx256m"
+#          taskappmaster:
+#            memory: 512m
+#            virtualCores: 1
+#            javaOpts: "-Xms512m -Xmx512m"
+#          taskcontainer:
+#            priority: 10
+#            memory: 256m
+#            virtualCores: 1
+#            javaOpts: "-Xms64m -Xmx256m"
+#  yarn:
+#    hostdiscovery:
+#      pointToPoint: false
+#      loopback: false
+#      preferInterface: ['eth', 'en']
+#      matchIpv4: 192.168.0.0/24
+#      matchInterface: eth\\d*
+
