@@ -88,7 +88,8 @@ public class DefaultYarnCloudAppService implements YarnCloudAppService, Initiali
 			FileCopyUtils.copy(artifact.getInputStream(), new FileOutputStream(tmp));
 			@SuppressWarnings("resource")
 			FsShell shell = new FsShell(configuration);
-			String artifactPath = dir + "/" + artifact.getFile().getName();
+//			String artifactPath = dir + "/" + artifact.getFile().getName();
+			String artifactPath = dir + "/" + artifact.getFilename();
 			if (!shell.test(artifactPath)) {
 				logger.info("Pushing artifact {} into dir {}", artifact, dir);
 				shell.copyFromLocal(tmp.getAbsolutePath(), artifactPath);
